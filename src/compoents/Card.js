@@ -1,11 +1,10 @@
 /*
  * @Date: 2022-06-29 10:53:06
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-06-29 15:48:45
+ * @LastEditTime: 2022-06-29 16:06:12
  * @FilePath: \holdem-cal\src\compoents\Card.js
  */
 import React from "react";
-import Draggable from "react-draggable";
 
 class Card extends React.Component{
   constructor(props){
@@ -31,17 +30,15 @@ class Card extends React.Component{
     }
     const rank = (this.state.rank-1)*(-44)+'px' 
     return(
-      <Draggable className="card">
-        <div>
-          <img 
-            src={'./images/card-trans.png'} 
-            alt={'card '+this.state.rank+this.state.suit}
-            style={{
-              background: `${'url(./images/poker-cards.jpg) '+ rank +' '+row}`,
-              cursor:'grab'
-            }}/>
-        </div>
-      </Draggable>
+      <div className="card">
+        <img 
+          src={'./images/card-trans.png'} 
+          alt={'card '+this.state.rank+this.state.suit}
+          style={{
+            background: `${'url(./images/poker-cards.jpg) '+ rank +' '+row}`,
+            cursor:'grab'
+          }}/>
+      </div>
     )
   }
 }
