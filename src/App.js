@@ -1,23 +1,15 @@
-import logo from './logo.svg';
+/*
+ * @Date: 2022-06-29 10:18:24
+ * @LastEditors: Ke Ren
+ * @LastEditTime: 2022-06-29 10:20:46
+ * @FilePath: \holdem-cal\src\App.js
+ */
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      APP
     </div>
   );
 }
