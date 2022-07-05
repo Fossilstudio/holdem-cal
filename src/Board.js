@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:33:49
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-06-29 14:10:47
+ * @LastEditTime: 2022-06-30 16:44:17
  * @FilePath: \holdem-cal\src\Board.js
  */
 import React from "react";
@@ -16,11 +16,11 @@ class Board extends React.Component{
           background: 'url(./images/board.png)'
         }}>
           <div className="dealer">
-            <CardBack />
-            <CardBack />
-            <CardBack />
-            <CardBack />
-            <CardBack />
+            <CardBack setRank={this.props.setRank} setSuit={this.props.setSuit}/>
+            <CardBack setRank={this.props.setRank} setSuit={this.props.setSuit}/>
+            <CardBack setRank={this.props.setRank} setSuit={this.props.setSuit}/>
+            <CardBack setRank={this.props.setRank} setSuit={this.props.setSuit}/>
+            <CardBack setRank={this.props.setRank} setSuit={this.props.setSuit}/>
           </div>
         </div>
       </div>
