@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 13:57:46
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-05 09:27:13
+ * @LastEditTime: 2022-07-05 10:49:09
  * @FilePath: \holdem-cal\src\compoents\CardBack.js
  */
 import React from "react";
@@ -57,15 +57,7 @@ class CardBack extends React.Component{
         suit:row
       }
     })
-
-    // this.setState({
-    //   rank: rank,
-    //   suit: this.props.setSuit,
-    // },()=>{
-    //   console.log(this.state.rank,rank)
-    //   this.forceUpdate()
-    //   console.log(e.target)
-    // })
+    this.props.getCard(this.props.setRank,this.props.setSuit,this.props.index)
   }
 }
 
