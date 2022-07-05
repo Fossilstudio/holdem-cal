@@ -11,6 +11,7 @@
   width: 44px;
   height: 64px;
 }
+
 .board {
   margin: 16px auto;
 }
@@ -40,3 +41,26 @@
   justify-content: center;
   gap: 5px;
 }
+
+.Score {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr 1fr; 
+  gap: 3px 3px; 
+  grid-template-areas: 
+    "Player Player . Computer Computer"
+    "WinRateP WinRateP Win WinRateC WinRateC"
+    "TieRateP TieRateP Tie TieRateC TieRateC";
+  background-color: rgb(57,140,236);
+  color: #fff;
+  margin: 1rem;
+}
+
+.player { grid-area: Player; }
+.computer { grid-area: Computer; }
+.winRateC { grid-area: WinRateC; }
+.winRateP { grid-area: WinRateP; }
+.win { grid-area: Win; }
+.tie { grid-area: Tie; }
+.tieRateP { grid-area: TieRateP; }
+.tieRateC { grid-area: TieRateC; }

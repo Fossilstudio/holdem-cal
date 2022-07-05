@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:33:49
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-05 11:41:15
+ * @LastEditTime: 2022-07-05 14:26:24
  * @FilePath: \holdem-cal\src\Board.js
  */
 import React from "react";
@@ -14,11 +14,13 @@ class Board extends React.Component{
       boardCards:[],
       computerCards:[],
       playerCards:[],
-      playerAmount:1
     }
     this.boardGetCardInfo = this.boardGetCardInfo.bind(this)
     this.computerGetCardInfo = this.computerGetCardInfo.bind(this)
     this.playerGetCardInfo = this.playerGetCardInfo.bind(this)
+  }
+  componentDidUpdate(){
+    this.props.getAllHandCards(this.state)
   }
   render(){
     // setup 5 board cards
@@ -86,7 +88,7 @@ class Board extends React.Component{
     cards[index] = [rank,suit]
     this.setState(()=>({
       boardCards:cards
-    }),()=>{console.log(this.state.boardCards)})
+    }))
   }
 
   computerGetCardInfo(rank,suit,index){
@@ -94,7 +96,7 @@ class Board extends React.Component{
     cards[index] = [rank,suit]
     this.setState(()=>({
       computerCards:cards
-    }),()=>{console.log(this.state.computerCards)})
+    }))
   }
 
   playerGetCardInfo(rank,suit,index){
@@ -102,7 +104,7 @@ class Board extends React.Component{
     cards[index] = [rank,suit]
     this.setState(()=>({
       playerCards:cards
-    }),()=>{console.log(this.state.playerCards)})
+    }))
   }
 }
 

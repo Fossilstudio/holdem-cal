@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:18:24
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-06-30 16:58:30
+ * @LastEditTime: 2022-07-05 14:27:35
  * @FilePath: \holdem-cal\src\App.js
  */
 import React from 'react';
@@ -16,19 +16,22 @@ class App extends React.Component{
     super(props)
     this.state= {
       selectedCardRank:'',
-      selectedCardSuit:''
+      selectedCardSuit:'',
+      winRate : 0,
+      tieRate : 0,
     }
     this.getSelectedCard = this.getSelectedCard.bind(this)
+    this.getAllHandCards = this.getAllHandCards.bind(this)
   }
   render(){
     return (
       <div className="App">
         <div className='LeftArea'>
-          <Board setRank={this.state.selectedCardRank} setSuit={this.state.selectedCardSuit}/>
+          <Board setRank={this.state.selectedCardRank} setSuit={this.state.selectedCardSuit} getAllHandCards={this.getAllHandCards}/>
           <Deck getSelectedCard={this.getSelectedCard}/>
         </div>
         <div>
-          <Score />
+          <Score winRate={this.state.winRate} tieRate={this.state.tieRate}/>
           <Rank />
         </div>
       </div>
@@ -41,6 +44,14 @@ class App extends React.Component{
       selectedCardSuit:suit,
     })
   }
+
+  getAllHandCards(state) {
+    const board = state.boardCards
+    const computer = state.computer
+    const player = state.player
+    console.log(board,computer,player)
+  }
+
 }
 
 export default App;
