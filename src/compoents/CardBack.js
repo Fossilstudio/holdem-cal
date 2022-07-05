@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 13:57:46
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-05 10:49:09
+ * @LastEditTime: 2022-07-05 11:40:28
  * @FilePath: \holdem-cal\src\compoents\CardBack.js
  */
 import React from "react";
@@ -57,7 +57,13 @@ class CardBack extends React.Component{
         suit:row
       }
     })
-    this.props.getCard(this.props.setRank,this.props.setSuit,this.props.index)
+    if (this.props.name === 'board') {
+      this.props.boardGetCardInfo(this.props.setRank,this.props.setSuit,this.props.index)
+    } else if (this.props.name === 'computer') {
+      this.props.computerGetCardInfo(this.props.setRank,this.props.setSuit,this.props.index)
+    } else if (this.props.name === 'player') {
+      this.props.playerGetCardInfo(this.props.setRank,this.props.setSuit,this.props.index)
+    } else { console.log('error')}
   }
 }
 

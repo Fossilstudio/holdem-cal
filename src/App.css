@@ -17,6 +17,7 @@
 
 .boardBackground {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
@@ -24,11 +25,14 @@
   height: 393px;
 }
 
-.dealer {
+.dealer,
+.player,
+.computer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap:16px
+  gap:16px;
+  margin:17px;  
 }
 
 .rowCards {
