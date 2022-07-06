@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 13:57:46
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-05 11:40:28
+ * @LastEditTime: 2022-07-06 16:10:24
  * @FilePath: \holdem-cal\src\compoents\CardBack.js
  */
 import React from "react";
@@ -42,11 +42,11 @@ class CardBack extends React.Component{
     let rank = -(this.props.setRank-1)*44+'px'
     let row = '0px'
     switch (this.props.setSuit) {
-      case 'diamond': row = '-64px'
+      case 'd': row = '-64px'
         break;
-      case 'heart': row = '-128px'
+      case 'h': row = '-128px'
         break;
-      case 'spade': row = '-192px'
+      case 's': row = '-192px'
         break;
       default: 
         break;
@@ -64,6 +64,13 @@ class CardBack extends React.Component{
     } else if (this.props.name === 'player') {
       this.props.playerGetCardInfo(this.props.setRank,this.props.setSuit,this.props.index)
     } else { console.log('error')}
+
+    this.props.tempCard.draggable = false
+    let tempRank = (this.props.setRank<11)? this.props.setRank:((this.props.setRank===11)?'J':((this.props.setRank===12)?'Q':'K'))
+    const selectedCardImg = document.getElementById(tempRank+this.props.setSuit)
+    console.log(selectedCardImg.style.background)
+    selectedCardImg.style.background= `${'url(./images/poker-cards-disable.jpg) -88px -256px'}`
+    selectedCardImg.style.cursor = 'default'
   }
 }
 

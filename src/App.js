@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:18:24
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-05 14:27:35
+ * @LastEditTime: 2022-07-06 14:06:19
  * @FilePath: \holdem-cal\src\App.js
  */
 import React from 'react';
@@ -17,8 +17,10 @@ class App extends React.Component{
     this.state= {
       selectedCardRank:'',
       selectedCardSuit:'',
+      isSelected: false,
       winRate : 0,
       tieRate : 0,
+      tempCard:null
     }
     this.getSelectedCard = this.getSelectedCard.bind(this)
     this.getAllHandCards = this.getAllHandCards.bind(this)
@@ -27,7 +29,11 @@ class App extends React.Component{
     return (
       <div className="App">
         <div className='LeftArea'>
-          <Board setRank={this.state.selectedCardRank} setSuit={this.state.selectedCardSuit} getAllHandCards={this.getAllHandCards}/>
+          <Board setRank={this.state.selectedCardRank} 
+                 setSuit={this.state.selectedCardSuit}
+                 isSelected = {this.cardSeclected} 
+                 getAllHandCards={this.getAllHandCards} 
+                 tempCard={this.state.tempCard}/>
           <Deck getSelectedCard={this.getSelectedCard}/>
         </div>
         <div>
@@ -38,17 +44,15 @@ class App extends React.Component{
     )
   }
 
-  getSelectedCard(rank, suit){
+  getSelectedCard(rank, suit, card){
     this.setState({
       selectedCardRank:rank,
       selectedCardSuit:suit,
+      tempCard: card,
     })
   }
 
-  getAllHandCards(state) {
-    const board = state.boardCards
-    const computer = state.computer
-    const player = state.player
+  getAllHandCards(board,computer,player) {
     console.log(board,computer,player)
   }
 

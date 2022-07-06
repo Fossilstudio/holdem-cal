@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:33:49
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-06-30 16:53:36
+ * @LastEditTime: 2022-07-06 13:34:59
  * @FilePath: \holdem-cal\src\Deck.js
  */
 import React from "react";
@@ -13,13 +13,18 @@ class Deck extends React.Component{
     this.getSelectedCardInfo = this.getSelectedCardInfo.bind(this)
   }
   render(){
-    const cardSuits = ['club','diamond','heart','spade']
+    const cardSuits = ['c','d','h','s']
     let rowCards =[] // store cards 
     const allCards = []
 
     cardSuits.map((suit)=>{
       for (let index = 1; index < 14; index++) {
-       rowCards.push(<Card key={index + ' ' + suit} suit = {suit} rank = {index} getSelectedCardInfo={this.getSelectedCardInfo}/>)      
+       rowCards.push(
+        <Card key={index + ' ' + suit} 
+              suit = {suit} 
+              rank = {index} 
+              getSelectedCardInfo={this.getSelectedCardInfo}
+        />)      
       }
       allCards.push(<div key={suit} className={suit + ' rowCards'}>{rowCards}</div>)
       rowCards=[]
@@ -33,8 +38,8 @@ class Deck extends React.Component{
     )
   }
 
-  getSelectedCardInfo(rank, suit){
-    this.props.getSelectedCard(rank, suit)
+  getSelectedCardInfo(rank, suit, isSelected, card){
+    this.props.getSelectedCard(rank, suit, isSelected, card)
   }
 }
 
