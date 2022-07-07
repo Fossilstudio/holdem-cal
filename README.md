@@ -1,3 +1,5 @@
-This is a Holdem Calculator
+This is a Holdem Calculator.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can drag and drop cards from the Decks, then you will see the win and tie rate automatically.
+
+Thanks to emlieindik for the API for the computational part. Here is his link. https://github.com/emileindik/poker-odds-machine
