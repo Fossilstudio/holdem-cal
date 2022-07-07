@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:18:24
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-07 11:13:47
+ * @LastEditTime: 2022-07-07 15:38:03
  * @FilePath: \holdem-cal\src\App.js
  */
 import React from 'react';
@@ -25,6 +25,28 @@ class App extends React.Component{
       playerTieRate : 0,
       computerWinRate: 0,
       computerTieRate:0,
+      playerResult:{
+        flush: {count:0, percent:0},
+        fullHouse: {count:0, percent:0},
+        highCard: {count:0, percent:0},
+        pair: {count:0, percent:0},
+        quads: {count:0, percent:0},
+        straight: {count:0, percent:0},
+        straightFlush: {count:0, percent:0},
+        trips: {count:0, percent:0},
+        twoPair: {count:0, percent:0},
+      },
+      computerResult:{
+        flush: {count:0, percent:0},
+        fullHouse: {count:0, percent:0},
+        highCard: {count:0, percent:0},
+        pair: {count:0, percent:0},
+        quads: {count:0, percent:0},
+        straight: {count:0, percent:0},
+        straightFlush: {count:0, percent:0},
+        trips: {count:0, percent:0},
+        twoPair: {count:0, percent:0},
+      },
       tempCard:null,
       calculatorLock:false,
     }
@@ -50,7 +72,9 @@ class App extends React.Component{
                  computerWinRate={this.state.computerWinRate}
                  computerTieRate={this.state.computerTieRate}
           />
-          <Rank />
+          <Rank playerResult={this.state.playerResult}
+                computerResult={this.state.computerResult}
+          />
         </div>
       </div>
     )
@@ -89,7 +113,7 @@ class App extends React.Component{
       numDecks:1,
       returnHandStats:true,
       returnTieHandStats:true,
-      iterations:1000000,
+      iterations:10000,
 
     }
     const c = new Calculator(input)
@@ -109,6 +133,8 @@ class App extends React.Component{
       playerTieRate: Math.round(playerTiePercent),
       computerWinRate: Math.round(computerWinPercent),
       computerTieRate: Math.round(computerTiePercent),
+      playerResult:s[playerResult].handStats,
+      computerResult:s[computerResult].handStats,
     }))
   }
 

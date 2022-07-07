@@ -5,6 +5,7 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   text-align: center;
+  margin-right: 10%;
 }
 
 .card img {
@@ -65,3 +66,7 @@
 .tie { grid-area: Tie; }
 .tieRateP { grid-area: TieRateP; }
 .tieRateC { grid-area: TieRateC; }
+
+.rankListItem {
+  display: flex;
+}
