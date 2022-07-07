@@ -1,10 +1,10 @@
 /*
  * @Date: 2022-06-29 10:18:24
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-07 15:38:03
+ * @LastEditTime: 2022-07-07 16:24:26
  * @FilePath: \holdem-cal\src\App.js
  */
-import React from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
 import Board from './Board';
 import Deck from './Deck';
@@ -57,26 +57,32 @@ class App extends React.Component{
   
   render(){
     return (
-      <div className="App">
-        <div className='LeftArea'>
-          <Board setRank={this.state.selectedCardRank} 
-                 setSuit={this.state.selectedCardSuit}
-                 isSelected = {this.cardSeclected} 
-                 getAllHandCards={this.getAllHandCards} 
-                 tempCard={this.state.tempCard}/>
-          <Deck getSelectedCard={this.getSelectedCard}/>
+      <Fragment>
+        <div className="App">
+          <div className='LeftArea'>
+            <Board setRank={this.state.selectedCardRank} 
+                  setSuit={this.state.selectedCardSuit}
+                  isSelected = {this.cardSeclected} 
+                  getAllHandCards={this.getAllHandCards} 
+                  tempCard={this.state.tempCard}/>
+            <Deck getSelectedCard={this.getSelectedCard}/>
+          </div>
+          <div>
+            <Score playerWinRate={this.state.playerWinRate}
+                  playerTieRate={this.state.playerTieRate}
+                  computerWinRate={this.state.computerWinRate}
+                  computerTieRate={this.state.computerTieRate}
+            />
+            <Rank playerResult={this.state.playerResult}
+                  computerResult={this.state.computerResult}
+            />
+          </div>
         </div>
-        <div>
-          <Score playerWinRate={this.state.playerWinRate}
-                 playerTieRate={this.state.playerTieRate}
-                 computerWinRate={this.state.computerWinRate}
-                 computerTieRate={this.state.computerTieRate}
-          />
-          <Rank playerResult={this.state.playerResult}
-                computerResult={this.state.computerResult}
-          />
+        <div className='copyright'>
+          <p>Author: Ke Ren</p>
+          <p>Github: <a href='https://github.com/Fossilstudio/holdem-cal' target={'_blank'} rel="noreferrer">https://github.com/Fossilstudio/holdem-cal</a></p>
         </div>
-      </div>
+      </Fragment>
     )
   }
 
@@ -121,8 +127,6 @@ class App extends React.Component{
     const props = Object.keys(s)
     const computerResult = props[1]
     const playerResult = props[0]
-    console.log(s[computerResult])
-    console.log(s[playerResult])
     const playerWinPercent = s[playerResult].winPercent
     const computerWinPercent = s[computerResult].winPercent
     const playerTiePercent = s[playerResult].tiePercent

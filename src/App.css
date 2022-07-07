@@ -70,3 +70,7 @@
 .rankListItem {
   display: flex;
 }
+
+.copyright {
+  margin-left: 2rem;
+}
