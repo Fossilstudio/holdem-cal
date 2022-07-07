@@ -1,9 +1,10 @@
 /*
  * @Date: 2022-06-29 10:33:49
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-06 13:50:27
+ * @LastEditTime: 2022-07-07 11:38:12
  * @FilePath: \holdem-cal\src\Board.js
  */
+import { Typography } from "@mui/material";
 import React from "react";
 import CardBack from "./compoents/CardBack";
 
@@ -18,9 +19,11 @@ class Board extends React.Component{
     this.boardGetCardInfo = this.boardGetCardInfo.bind(this)
     this.computerGetCardInfo = this.computerGetCardInfo.bind(this)
     this.playerGetCardInfo = this.playerGetCardInfo.bind(this)
+    this.changeCardName = this.changeCardName.bind(this)
   }
   componentDidUpdate(){
-    this.props.getAllHandCards(this.state.boardCards,this.state.computerCards,this.state.playerCards)
+    const boardCards = this.state.boardCards.filter(n=>n)
+    this.props.getAllHandCards(boardCards,this.state.computerCards,this.state.playerCards)
   }
   render(){
     // setup 5 board cards
@@ -34,16 +37,18 @@ class Board extends React.Component{
                   playerGetCardInfo = {this.playerGetCardInfo}
                   name = {'board'}
                   index={index} key={'board'+index}
-                  tempCard={this.props.tempCard}/>
+                  tempCard={this.props.tempCard}
+                  changeCardName={this.changeCardName}/>
       )
     }
     return(
       <div className="board">
-        <div>Here is the board</div>
         <div className="boardBackground" style={{
-          background: 'url(./images/board.png)'
+          background: 'url(./images/board.png)',
         }}>
           <div className="computer">
+          <Typography variant="h7" sx={{color:'#398CEC', paddingBottom:'2px'}}>COMPUTER</Typography>
+            <div className="computerHands">
             <CardBack setRank={this.props.setRank} 
                       setSuit={this.props.setSuit}
                       boardGetCardInfo={this.boardGetCardInfo} 
@@ -51,7 +56,8 @@ class Board extends React.Component{
                       playerGetCardInfo = {this.playerGetCardInfo}
                       name = {'computer'}
                       index={0} key={'computer'+0}
-                      tempCard={this.props.tempCard}/>
+                      tempCard={this.props.tempCard}
+                      changeCardName={this.changeCardName}/>
             <CardBack setRank={this.props.setRank} 
                       setSuit={this.props.setSuit} 
                       boardGetCardInfo={this.boardGetCardInfo}
@@ -59,28 +65,35 @@ class Board extends React.Component{
                       playerGetCardInfo = {this.playerGetCardInfo}
                       name = {'computer'}
                       index={1} key={'computer'+1}
-                      tempCard={this.props.tempCard}/>
+                      tempCard={this.props.tempCard}
+                      changeCardName={this.changeCardName}/>
+            </div>
           </div>
           <div className="dealer">
             {boardCardsList}
           </div>
           <div className="player">
-            <CardBack setRank={this.props.setRank} 
-                      setSuit={this.props.setSuit} 
-                      boardGetCardInfo={this.boardGetCardInfo} 
-                      computerGetCardInfo = {this.computerGetCardInfo}
-                      playerGetCardInfo = {this.playerGetCardInfo}
-                      name = {'player'}
-                      index={0} key={'player'+0}
-                      tempCard={this.props.tempCard}/>
-            <CardBack setRank={this.props.setRank} 
-                      setSuit={this.props.setSuit} 
-                      boardGetCardInfo={this.boardGetCardInfo}
-                      computerGetCardInfo = {this.computerGetCardInfo}
-                      playerGetCardInfo = {this.playerGetCardInfo}
-                      name = {'player'}
-                      index={1} key={'player'+1}
-                      tempCard={this.props.tempCard}/>
+            <div className="playerHands">
+              <CardBack setRank={this.props.setRank} 
+                        setSuit={this.props.setSuit} 
+                        boardGetCardInfo={this.boardGetCardInfo} 
+                        computerGetCardInfo = {this.computerGetCardInfo}
+                        playerGetCardInfo = {this.playerGetCardInfo}
+                        name = {'player'}
+                        index={0} key={'player'+0}
+                        tempCard={this.props.tempCard}
+                        changeCardName={this.changeCardName}/>
+              <CardBack setRank={this.props.setRank} 
+                        setSuit={this.props.setSuit} 
+                        boardGetCardInfo={this.boardGetCardInfo}
+                        computerGetCardInfo = {this.computerGetCardInfo}
+                        playerGetCardInfo = {this.playerGetCardInfo}
+                        name = {'player'}
+                        index={1} key={'player'+1}
+                        tempCard={this.props.tempCard}
+                        changeCardName={this.changeCardName}/>
+            </div>
+            <Typography variant="h7" sx={{color:'#fff'}}>PLAYER</Typography>
           </div>
         </div>
       </div>
@@ -90,7 +103,7 @@ class Board extends React.Component{
   // get the card's info which put on the board
   boardGetCardInfo(rank,suit,index){
     let cards = [...this.state.boardCards]
-    rank = (rank<11)? rank:((rank===11)?'J':((rank===12)?'Q':'K'))
+    rank = this.changeCardName(rank)
     cards[index] = rank+suit
     this.setState(()=>({
       boardCards:cards
@@ -99,7 +112,7 @@ class Board extends React.Component{
 
   computerGetCardInfo(rank,suit,index){
     let cards = [...this.state.computerCards]
-    rank = (rank<11)? rank:((rank===11)?'J':((rank===12)?'Q':'K'))
+    rank = this.changeCardName(rank)
     cards[index] = rank+suit
     this.setState(()=>({
       computerCards:cards
@@ -108,11 +121,25 @@ class Board extends React.Component{
 
   playerGetCardInfo(rank,suit,index){
     let cards = [...this.state.playerCards]
-    rank = (rank<11)? rank:((rank===11)?'J':((rank===12)?'Q':'K'))
+    rank = this.changeCardName(rank)
     cards[index] = rank+suit
     this.setState(()=>({
       playerCards:cards
     }))
+  }
+  
+  changeCardName(rank) {
+    if (rank===1) {
+      return 'A'
+    } else if (rank === 11) {
+      return 'J'
+    }else if (rank === 12) {
+      return 'Q'
+    }else if (rank === 13) {
+      return 'K'
+    }else if (rank === 10) {
+      return 'T'
+    } else return rank
   }
 }
 

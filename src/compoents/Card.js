@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:53:06
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-06 14:03:56
+ * @LastEditTime: 2022-07-06 22:58:40
  * @FilePath: \holdem-cal\src\compoents\Card.js
  */
 import React from "react";
@@ -15,6 +15,7 @@ class Card extends React.Component{
       isSelected: false,
     }
     this.onDragStart = this.onDragStart.bind(this)
+    this.changeCardName = this.changeCardName.bind(this)
   }
 
   render(){
@@ -31,7 +32,7 @@ class Card extends React.Component{
     }
     const rank = (this.state.rank-1)*(-44)+'px' 
 
-    let tempRank = (this.state.rank<11)? this.state.rank:((this.state.rank===11)?'J':((this.state.rank===12)?'Q':'K'))
+    let tempRank = this.changeCardName(this.state.rank)
 
     return(
       <div className="card"
@@ -56,6 +57,19 @@ class Card extends React.Component{
     this.props.getSelectedCardInfo(this.state.rank, this.state.suit, e.target)
   }
 
+  changeCardName(rank) {
+    if (rank===1) {
+      return 'A'
+    } else if (rank === 11) {
+      return 'J'
+    }else if (rank === 12) {
+      return 'Q'
+    }else if (rank === 13) {
+      return 'K'
+    }else if (rank === 10) {
+      return 'T'
+    } else return rank
+  }
 }
 
 export default Card

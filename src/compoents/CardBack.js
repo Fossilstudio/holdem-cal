@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 13:57:46
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-06 16:10:24
+ * @LastEditTime: 2022-07-07 10:28:04
  * @FilePath: \holdem-cal\src\compoents\CardBack.js
  */
 import React from "react";
@@ -11,7 +11,8 @@ class CardBack extends React.Component{
     super(props)
     this.state = {
       rank: '-88px',
-      suit: '-256px'
+      suit: '-256px',
+      previewCardId:null
     }
     this.onDragOver = this.onDragOver.bind(this)
     this.onDrop = this.onDrop.bind(this)
@@ -41,6 +42,15 @@ class CardBack extends React.Component{
     e.preventDefault()
     let rank = -(this.props.setRank-1)*44+'px'
     let row = '0px'
+    let tempRank = this.props.changeCardName(this.props.setRank)
+
+    const previewCard = document.getElementById(this.state.previewCardId)
+    if(previewCard!==null){
+      previewCard.style.background= `${'url(./images/poker-cards.jpg) '+this.state.rank+' '+this.state.suit}`
+      previewCard.style.cursor= 'grab'
+      previewCard.draggable = true
+    }
+
     switch (this.props.setSuit) {
       case 'd': row = '-64px'
         break;
@@ -51,10 +61,11 @@ class CardBack extends React.Component{
       default: 
         break;
     }
-    this.setState(function () {
+    this.setState( ()=> {
       return{
         rank:rank,
-        suit:row
+        suit:row,
+        previewCardId:tempRank+this.props.setSuit
       }
     })
     if (this.props.name === 'board') {
@@ -66,11 +77,11 @@ class CardBack extends React.Component{
     } else { console.log('error')}
 
     this.props.tempCard.draggable = false
-    let tempRank = (this.props.setRank<11)? this.props.setRank:((this.props.setRank===11)?'J':((this.props.setRank===12)?'Q':'K'))
     const selectedCardImg = document.getElementById(tempRank+this.props.setSuit)
-    console.log(selectedCardImg.style.background)
     selectedCardImg.style.background= `${'url(./images/poker-cards-disable.jpg) -88px -256px'}`
     selectedCardImg.style.cursor = 'default'
+
+
   }
 }
 
