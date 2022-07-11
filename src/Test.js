@@ -1,75 +1,44 @@
 /*
  * @Date: 2022-06-30 10:04:27
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-06-30 15:56:17
+ * @LastEditTime: 2022-07-11 10:00:30
  * @FilePath: \holdem-cal\src\Test.js
  */
 import React from "react";
+import Card from "./compoents/Card";
 
 class Test extends React.Component{
   constructor(props){
     super(props)
-    this.onDragStart = this.onDragStart.bind(this)
-    this.onDrop = this.onDrop.bind(this)
-    this.onDragOver = this.onDragOver.bind(this)
+    this.state ={
+      rank:1,
+      suit:'d'
+    }
+    this.getSelectedCardInfoTouch = this.getSelectedCardInfoTouch.bind(this)
   }
 
   render(){
     return(
       <div>
-        <div id='div1'
-          // onDrop={this.onDrop}
-          // onDragOver = {this.onDragOver}
-          style={{
-            width:'44px',
-            height:'64px',
-            border:'1px solid black'
-          }}
+        <Card suit = {this.state.suit} 
+          rank = {this.state.rank} 
+          display = {'block'}
+          isCopy = {'original'}
+          getSelectedCardInfo={this.getSelectedCardInfo}
+          getSelectedCardInfoTouch = {this.getSelectedCardInfoTouch}
+          draggable = {true}
         />
-        <br></br>
-        <div id='div2'
-          draggable={true}
-          // onDragStart={this.onDragStart}
-          style={{
-            width:'100px',
-            height:'50px',
-            border:'1px solid red'
-          }}
-        />
-        <br></br>
-        <div className="card"
-        id={'testCard'}
-        draggable={true}
-        style={{
-          width:'44px',
-          height:'64px',
-          border:'1px solid red'
-        }} 
-      >
-        <img
-          draggable={false} 
-          src={'./images/card-trans.png'} 
-          alt={'card'}
-          style={{
-            background: 'url(./images/poker-cards.jpg) 44px 128px'
-          }}/>
-        </div>
       </div>
     )
   }
 
-  onDragStart(e){
-    e.dataTransfer.setData('text',e.target.id)
-  }
-
-  onDrop(e){
-    e.preventDefault()
-    const data = e.dataTransfer.getData('text')
-    e.target.appendChild(document.getElementById(data))
-  }
-
-  onDragOver(e){
-    e.preventDefault()
+  getSelectedCardInfoTouch(){
+    this.setState(preState=>{
+      return{
+        ...preState,
+        rank:preState.rank+1
+      }
+    },console.log(this.state.rank))
   }
 }
 

@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:53:06
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-06 22:58:40
+ * @LastEditTime: 2022-07-11 10:20:33
  * @FilePath: \holdem-cal\src\compoents\Card.js
  */
 import React from "react";
@@ -16,7 +16,17 @@ class Card extends React.Component{
     }
     this.onDragStart = this.onDragStart.bind(this)
     this.changeCardName = this.changeCardName.bind(this)
+    this.onTouchStart = this.onTouchStart.bind(this)
   }
+
+  // shouldComponentUpdate(){
+  //   this.setState((props)=>(
+  //     {
+  //       rank:props.rank,
+  //       suit:props.suit,
+  //     }
+  //   ))
+  // }
 
   render(){
     let row = '0px'
@@ -33,17 +43,21 @@ class Card extends React.Component{
     const rank = (this.state.rank-1)*(-44)+'px' 
 
     let tempRank = this.changeCardName(this.state.rank)
-
     return(
       <div className="card"
-        draggable={true} 
+        draggable={this.props.draggable} 
         onDragStart = {this.onDragStart}
+        onTouchStart = {this.onTouchStart}
+        style={{
+          display:this.props.display,
+          position:this.props.position,
+        }}
       >
         <img
         id={tempRank+this.state.suit}
         draggable={false} 
           src={'./images/card-trans.png'} 
-          alt={'card '+this.state.rank+this.state.suit}
+          alt={'card '+tempRank+this.state.suit}
           style={{
             background: `${'url(./images/poker-cards.jpg)'+ rank +' '+row}`,
             cursor: 'grab',
@@ -53,8 +67,13 @@ class Card extends React.Component{
   }
 
   onDragStart(e){
+    console.log(e.target)
     e.dataTransfer.setData("text",e.target.id)
     this.props.getSelectedCardInfo(this.state.rank, this.state.suit, e.target)
+  }
+  onTouchStart(e){
+    const target = e.touches[0].target.parentNode
+    this.props.getSelectedCardInfoTouch(this.state.rank, this.state.suit, target)
   }
 
   changeCardName(rank) {
