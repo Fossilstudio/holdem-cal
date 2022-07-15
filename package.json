@@ -2,7 +2,7 @@
   "name": "holdem-cal",
   "version": "0.1.0",
   "private": true,
-  "homepage":".",
+  "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
@@ -15,6 +15,7 @@
     "poker-odds-machine": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-drag-drop-container": "^6.1.1",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"

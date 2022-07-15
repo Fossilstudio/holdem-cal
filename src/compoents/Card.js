@@ -1,10 +1,11 @@
 /*
  * @Date: 2022-06-29 10:53:06
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-11 10:20:33
+ * @LastEditTime: 2022-07-14 16:05:29
  * @FilePath: \holdem-cal\src\compoents\Card.js
  */
 import React from "react";
+import {DragDropContainer} from "react-drag-drop-container"
 
 class Card extends React.Component{
   constructor(props){
@@ -14,19 +15,11 @@ class Card extends React.Component{
       suit : this.props.suit,
       isSelected: false,
     }
-    this.onDragStart = this.onDragStart.bind(this)
     this.changeCardName = this.changeCardName.bind(this)
-    this.onTouchStart = this.onTouchStart.bind(this)
+    this.onDragEnd = this.onDragEnd.bind(this)
+    this.onDragStart = this.onDragStart.bind(this)
   }
 
-  // shouldComponentUpdate(){
-  //   this.setState((props)=>(
-  //     {
-  //       rank:props.rank,
-  //       suit:props.suit,
-  //     }
-  //   ))
-  // }
 
   render(){
     let row = '0px'
@@ -44,36 +37,31 @@ class Card extends React.Component{
 
     let tempRank = this.changeCardName(this.state.rank)
     return(
-      <div className="card"
-        draggable={this.props.draggable} 
-        onDragStart = {this.onDragStart}
-        onTouchStart = {this.onTouchStart}
+      <div id={this.props.rank+this.props.suit}
         style={{
-          display:this.props.display,
-          position:this.props.position,
+          display:'inline-block',
         }}
       >
-        <img
-        id={tempRank+this.state.suit}
-        draggable={false} 
-          src={'./images/card-trans.png'} 
-          alt={'card '+tempRank+this.state.suit}
-          style={{
-            background: `${'url(./images/poker-cards.jpg)'+ rank +' '+row}`,
-            cursor: 'grab',
-          }}/>
+        <DragDropContainer
+          targetKey = {'card'}
+          dragData = {{rank:this.props.rank,suit:this.props.suit}}
+          dragClone={this.props.dragClone || false}
+          dragHandleClassName = 'grabber'
+          onDragEnd={this.onDragEnd}
+          onDragStart = {this.onDragStart}
+        >
+          <img
+            className="grabber"
+            id={tempRank+this.state.suit}
+            src={'./images/card-trans.png'} 
+            alt={'card '+tempRank+this.state.suit}
+            style={{
+              background: `${'url(./images/poker-cards.jpg)'+ rank +' '+row}`,
+              cursor: 'grab',
+            }}/>
+        </DragDropContainer>
       </div>
     )
-  }
-
-  onDragStart(e){
-    console.log(e.target)
-    e.dataTransfer.setData("text",e.target.id)
-    this.props.getSelectedCardInfo(this.state.rank, this.state.suit, e.target)
-  }
-  onTouchStart(e){
-    const target = e.touches[0].target.parentNode
-    this.props.getSelectedCardInfoTouch(this.state.rank, this.state.suit, target)
   }
 
   changeCardName(rank) {
@@ -89,6 +77,21 @@ class Card extends React.Component{
       return 'T'
     } else return rank
   }
+
+  onDragEnd(dragData,currentTarget,x,y) {
+    const targetName = currentTarget.className
+    if(targetName!=='dropPlace') {
+      const $card = document.getElementById(this.state.rank+this.state.suit)
+      const $ghost = $card.querySelector('.ddcontainerghost')
+      $ghost.style.display = 'none'
+    }
+  }
+
+  onDragStart(){
+    const $card = document.getElementById(this.state.rank+this.state.suit)
+    const $ghost = $card.querySelector('.ddcontainerghost')
+    $ghost.style.display = 'block'
+}
 }
 
 export default Card

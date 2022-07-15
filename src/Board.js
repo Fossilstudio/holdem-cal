@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:33:49
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-07 11:38:12
+ * @LastEditTime: 2022-07-15 09:33:19
  * @FilePath: \holdem-cal\src\Board.js
  */
 import { Typography } from "@mui/material";
@@ -30,9 +30,7 @@ class Board extends React.Component{
     let boardCardsList = []
     for (let index = 0; index < 5; index++) {
       boardCardsList.push(
-        <CardBack setRank={this.props.setRank} 
-                  setSuit={this.props.setSuit} 
-                  boardGetCardInfo={this.boardGetCardInfo} 
+        <CardBack boardGetCardInfo={this.boardGetCardInfo} 
                   computerGetCardInfo = {this.computerGetCardInfo}
                   playerGetCardInfo = {this.playerGetCardInfo}
                   name = {'board'}
@@ -49,18 +47,14 @@ class Board extends React.Component{
           <div className="computer">
           <Typography variant="h7" sx={{color:'#398CEC', paddingBottom:'2px'}}>COMPUTER</Typography>
             <div className="computerHands">
-            <CardBack setRank={this.props.setRank} 
-                      setSuit={this.props.setSuit}
-                      boardGetCardInfo={this.boardGetCardInfo} 
+            <CardBack boardGetCardInfo={this.boardGetCardInfo} 
                       computerGetCardInfo = {this.computerGetCardInfo}
                       playerGetCardInfo = {this.playerGetCardInfo}
                       name = {'computer'}
                       index={0} key={'computer'+0}
                       tempCard={this.props.tempCard}
                       changeCardName={this.changeCardName}/>
-            <CardBack setRank={this.props.setRank} 
-                      setSuit={this.props.setSuit} 
-                      boardGetCardInfo={this.boardGetCardInfo}
+            <CardBack boardGetCardInfo={this.boardGetCardInfo}
                       computerGetCardInfo = {this.computerGetCardInfo}
                       playerGetCardInfo = {this.playerGetCardInfo}
                       name = {'computer'}
@@ -74,18 +68,14 @@ class Board extends React.Component{
           </div>
           <div className="player">
             <div className="playerHands">
-              <CardBack setRank={this.props.setRank} 
-                        setSuit={this.props.setSuit} 
-                        boardGetCardInfo={this.boardGetCardInfo} 
+              <CardBack boardGetCardInfo={this.boardGetCardInfo} 
                         computerGetCardInfo = {this.computerGetCardInfo}
                         playerGetCardInfo = {this.playerGetCardInfo}
                         name = {'player'}
                         index={0} key={'player'+0}
                         tempCard={this.props.tempCard}
                         changeCardName={this.changeCardName}/>
-              <CardBack setRank={this.props.setRank} 
-                        setSuit={this.props.setSuit} 
-                        boardGetCardInfo={this.boardGetCardInfo}
+              <CardBack boardGetCardInfo={this.boardGetCardInfo}
                         computerGetCardInfo = {this.computerGetCardInfo}
                         playerGetCardInfo = {this.playerGetCardInfo}
                         name = {'player'}
@@ -107,7 +97,7 @@ class Board extends React.Component{
     cards[index] = rank+suit
     this.setState(()=>({
       boardCards:cards
-    }))
+    }),()=>{console.log(this.state.boardCards)})
   }
 
   computerGetCardInfo(rank,suit,index){

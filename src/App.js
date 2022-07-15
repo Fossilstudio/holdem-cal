@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:18:24
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-07 16:24:26
+ * @LastEditTime: 2022-07-15 09:44:36
  * @FilePath: \holdem-cal\src\App.js
  */
 import React, { Fragment } from 'react';
@@ -50,7 +50,6 @@ class App extends React.Component{
       tempCard:null,
       calculatorLock:false,
     }
-    this.getSelectedCard = this.getSelectedCard.bind(this)
     this.getAllHandCards = this.getAllHandCards.bind(this)
     this.calculator = this.calculator.bind(this)
   }
@@ -65,7 +64,7 @@ class App extends React.Component{
                   isSelected = {this.cardSeclected} 
                   getAllHandCards={this.getAllHandCards} 
                   tempCard={this.state.tempCard}/>
-            <Deck getSelectedCard={this.getSelectedCard}/>
+            <Deck />
           </div>
           <div>
             <Score playerWinRate={this.state.playerWinRate}
@@ -86,18 +85,12 @@ class App extends React.Component{
     )
   }
 
-  getSelectedCard(rank, suit, card){
-    this.setState({
-      selectedCardRank:rank,
-      selectedCardSuit:suit,
-      tempCard: card,
-    })
-  }
-
   getAllHandCards(board,computer,player) {
     const boardChage = (board.toString() !== this.state.tempBoard.toString())
-    if(computer.length === 2 && player.length ===2) {
+    if(computer.length === 2 && player.length ===2 && (typeof player[0] !== 'undefined') && (typeof computer[0]!=='undefined')) {
       if(player !== this.state.tempHand || computer !== this.state.tempCom || boardChage){
+        console.log((player[0] !== "undefined"))
+        console.log('cal:' + board.toString()+' '+computer.toString()+' '+player.toString() )
         this.calculator(board.toString(),computer.toString(),player.toString())
         this.setState(()=>({
           tempHand:player,
