@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:53:06
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-14 16:05:29
+ * @LastEditTime: 2022-07-15 16:26:46
  * @FilePath: \holdem-cal\src\compoents\Card.js
  */
 import React from "react";
@@ -22,24 +22,32 @@ class Card extends React.Component{
 
 
   render(){
+    
+    let cardSize = 2
+    let url = 'url(./images/poker-cards.jpg)'
+    let tempRank = this.changeCardName(this.state.rank)
+    if(this.props.screen.isMobile) {
+      cardSize=1
+      url = 'url(./images/poker-cards-mobile.jpg)'
+    }
+    const rank = (this.state.rank-1)*(-cardSize*22)+'px' 
     let row = '0px'
     switch (this.state.suit) {
-      case 'd': row = '-64px'
+      case 'd': row = -cardSize*32+'px'
         break;
-      case 'h': row = '-128px'
+      case 'h': row = -cardSize*64+'px'
         break;
-      case 's': row = '-192px'
+      case 's': row = -cardSize*96+'px'
         break;
       default: 
         break;
     }
-    const rank = (this.state.rank-1)*(-44)+'px' 
-
-    let tempRank = this.changeCardName(this.state.rank)
     return(
       <div id={this.props.rank+this.props.suit}
         style={{
           display:'inline-block',
+          width:`${cardSize*22}px`,
+          height:'100%',
         }}
       >
         <DragDropContainer
@@ -56,8 +64,8 @@ class Card extends React.Component{
             src={'./images/card-trans.png'} 
             alt={'card '+tempRank+this.state.suit}
             style={{
-              background: `${'url(./images/poker-cards.jpg)'+ rank +' '+row}`,
-              cursor: 'grab',
+              background: `${url+ rank +' '+row}`,
+              width:`${cardSize*22}px`,
             }}/>
         </DragDropContainer>
       </div>

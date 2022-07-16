@@ -1,4 +1,4 @@
-.App {
+/* .App {
   display: grid;
   grid-template-columns: 4fr 1fr;
   grid-template-rows: 1fr;
@@ -6,11 +6,11 @@
   grid-row-gap: 0px;
   text-align: center;
   margin-right: 10%;
-}
+} */
 
-.card img {
-  width: 44px;
-  height: 64px;
+.LeftArea {
+  display: flex;
+  flex-direction: column;
 }
 
 .board {
@@ -22,9 +22,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  width: 856px;
-  height: 393px;
 }
 
 .dealer,
@@ -33,8 +30,8 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap:16px;
-  margin:17px; 
+  gap:2px;
+  margin:2px 0;
 }
 
 .rowCards {
@@ -47,7 +44,6 @@
   display: grid; 
   grid-template-columns: 1fr 1fr 0.5fr 1fr 1fr; 
   grid-template-rows: 1fr 1fr 1fr; 
-  gap: 10px 3px; 
   grid-template-areas: 
     "Player Player . Computer Computer"
     "WinRateP WinRateP Win WinRateC WinRateC"
@@ -55,7 +51,7 @@
   background-color: rgb(57,140,236);
   color: #fff;
   margin: 1rem;
-  padding: 10px;
+  padding: 5px;
 }
 
 .player { grid-area: Player; }

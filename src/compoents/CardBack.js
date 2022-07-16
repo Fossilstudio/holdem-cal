@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 13:57:46
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-15 09:35:18
+ * @LastEditTime: 2022-07-16 00:56:03
  * @FilePath: \holdem-cal\src\compoents\CardBack.js
  */
 import React from "react";
@@ -16,10 +16,31 @@ class CardBack extends React.Component{
     }
     this.handleDrop = this.handleDrop.bind(this)
   }
+
+  componentDidMount(){
+    if(this.props.screen.isMobile) {
+      this.setState(()=>({
+        pickedRank: '-44px',
+        pickedSuit: '-128px',
+      }))
+    }
+  }
+
   render(){
     const state = this.state
+    let cardSize = 2
+    let margin = '12px'
+    let url = 'url(./images/poker-cards.jpg)'
+    if(this.props.screen.isMobile) {
+      cardSize=1
+      url = 'url(./images/poker-cards-mobile.jpg)'
+      margin = '0 5px'
+    }
     return(
-      <div className="boardCard">
+      <div className="boardCard" style={{
+        width:cardSize*22+'px',
+        margin:margin
+      }}>
         <DropTarget
           targetKey = {'card'}
           onHit={this.handleDrop}
@@ -29,7 +50,9 @@ class CardBack extends React.Component{
             src={'./images/card-trans.png'} 
             alt={'card back'}
             style = {{
-              background: `${'url(./images/poker-cards.jpg )'+state.pickedRank+' '+state.pickedSuit}`
+              background: `${url+state.pickedRank+' '+state.pickedSuit}`,
+              width: cardSize*22+'px',
+              height: 'auto',
             }}
           />
         </DropTarget>
@@ -39,17 +62,17 @@ class CardBack extends React.Component{
 
   handleDrop(e) {
     e.stopPropagation()
-    const rank = (e.dragData.rank-1)*(-44)+'px'
+    const cardSize = (this.props.screen.isMobile)? 1:2
+    const rank = (e.dragData.rank-1)*(-cardSize*22)+'px'
     let suit = '0px'
-
     
     switch (e.dragData.suit) {
-      case 'd': suit = '-64px'
-      break;
-      case 'h': suit = '-128px'
-      break;
-      case 's': suit  ='-192px'
-      break;
+      case 'd': suit = -cardSize*32+'px'
+        break;
+      case 'h': suit = -cardSize*64+'px'
+        break;
+      case 's': suit = -cardSize*96+'px'
+        break;
       default: suit = '0px'
     }
     e.containerElem.style.visibility="hidden";

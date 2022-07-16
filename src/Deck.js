@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:33:49
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-14 16:28:01
+ * @LastEditTime: 2022-07-15 16:31:21
  * @FilePath: \holdem-cal\src\Deck.js
  */
 import React from "react";
@@ -31,6 +31,7 @@ class Deck extends React.Component{
               dragClone = {true} 
               display = {'block'}
               isCopy = {'original'}
+              screen = {this.props.screen}
         />)      
       }
       allCards.push(<div key={suit} className={suit + ' rowCards'}>{rowCards}</div>)
@@ -39,7 +40,11 @@ class Deck extends React.Component{
     })
 
     return(
-      <div className="Deck">
+      <div className="Deck" style={{
+        display:"flex",
+        flexDirection:'column',
+        alignContent:'center'
+      }}>
         {allCards}
       </div>
     )

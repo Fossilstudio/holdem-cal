@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:18:24
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-14 15:48:26
+ * @LastEditTime: 2022-07-15 15:03:55
  * @FilePath: \holdem-cal\src\index.js
  */
 import React from 'react';
@@ -13,7 +13,7 @@ import Test from './Test'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Test />
   </React.StrictMode>
 );
 

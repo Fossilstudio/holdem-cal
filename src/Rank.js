@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:33:49
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-07 16:21:09
+ * @LastEditTime: 2022-07-16 01:02:41
  * @FilePath: \holdem-cal\src\Rank.js
  */
 import React from "react";
@@ -35,8 +35,18 @@ class Rank extends React.Component{
       this.createData('Pair', this.props.playerResult.pair, this.props.computerResult.pair),
       this.createData('High Card', this.props.playerResult.highCard, this.props.computerResult.highCard),
     ]
+    let padding = '0'
+    let margin = '0'
+    if(!this.props.isMobile) {
+      padding='0 5%'
+      margin = '0 10px'
+    }
     return(
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} sx={{
+        padding:padding,
+        margin:margin,
+        width:null
+      }}>
         <Table aria-label="rank table">
           <TableHead>
             <TableRow>
@@ -49,9 +59,9 @@ class Rank extends React.Component{
             {rankList.map((row)=>(
               <TableRow key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.player.percent}%</TableCell>
-                <TableCell>{row.computer.percent}%</TableCell>
+                <TableCell size="small">{row.name}</TableCell>
+                <TableCell size="small">{row.player.percent}%</TableCell>
+                <TableCell size="small">{row.computer.percent}%</TableCell>
               </TableRow>
             ))}
           </TableBody>

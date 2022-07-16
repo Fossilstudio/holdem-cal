@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:18:24
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-15 09:44:36
+ * @LastEditTime: 2022-07-15 15:19:35
  * @FilePath: \holdem-cal\src\App.js
  */
 import React, { Fragment } from 'react';
@@ -54,19 +54,26 @@ class App extends React.Component{
     this.calculator = this.calculator.bind(this)
   }
   
-  render(){
+  render(){ 
     return (
       <Fragment>
-        <div className="App">
+        <div className="App" style={{
+          display:'flex',
+          flexDirection:'column',
+          justifyContent:'center',
+          textAlign:'center',
+        }}>
           <div className='LeftArea'>
             <Board setRank={this.state.selectedCardRank} 
                   setSuit={this.state.selectedCardSuit}
                   isSelected = {this.cardSeclected} 
                   getAllHandCards={this.getAllHandCards} 
-                  tempCard={this.state.tempCard}/>
+                  tempCard={this.state.tempCard}
+                  cardSize = {'100%'}
+            />
             <Deck />
           </div>
-          <div>
+          <div className='ScoreArea'>
             <Score playerWinRate={this.state.playerWinRate}
                   playerTieRate={this.state.playerTieRate}
                   computerWinRate={this.state.computerWinRate}
