@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-06-29 10:53:06
  * @LastEditors: Ke Ren
- * @LastEditTime: 2022-07-15 16:26:46
+ * @LastEditTime: 2022-07-18 13:15:02
  * @FilePath: \holdem-cal\src\compoents\Card.js
  */
 import React from "react";
@@ -17,9 +17,8 @@ class Card extends React.Component{
     }
     this.changeCardName = this.changeCardName.bind(this)
     this.onDragEnd = this.onDragEnd.bind(this)
-    this.onDragStart = this.onDragStart.bind(this)
+    this.onDrag = this.onDrag.bind(this)
   }
-
 
   render(){
     
@@ -56,7 +55,9 @@ class Card extends React.Component{
           dragClone={this.props.dragClone || false}
           dragHandleClassName = 'grabber'
           onDragEnd={this.onDragEnd}
-          onDragStart = {this.onDragStart}
+          // onDragStart = {this.onDragStart}
+          onDrag = {this.onDrag}
+
         >
           <img
             className="grabber"
@@ -95,11 +96,12 @@ class Card extends React.Component{
     }
   }
 
-  onDragStart(){
+  onDrag(){
+    console.log('start')
     const $card = document.getElementById(this.state.rank+this.state.suit)
     const $ghost = $card.querySelector('.ddcontainerghost')
     $ghost.style.display = 'block'
-}
+  }
 }
 
 export default Card
